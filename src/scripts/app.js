@@ -1,15 +1,22 @@
-const React = require('react'),
-	ReactDOM = require('react-dom')
+import ReactDOM from 'react-dom'
+import React from 'react'
+import TasksView from './Components'
+import Backbone from 'backbone'
+
 
 const app = function() {
 
-	const Header = React.createClass({
-		render: () => {
-			return <h1>YOLO</h1>
-		}
-	})
+    const TaskModel = Backbone.Model.extend({
+        defaults: {
+            smemo: 'memo'
+        }
+    })
 
-	ReactDOM.render(<Header/>,document.querySelector('.container'))
+    const TaskCollection = Backbone.Collection.extend({
+        model: TaskModel
+    })
+
+    ReactDOM.render(<TasksView tasksColl={new TaskCollection()} />,document.querySelector('.container'))
 }
 
 app()
